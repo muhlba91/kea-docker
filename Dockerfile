@@ -16,6 +16,16 @@ RUN apk update \
     make \
     bash \
     kea=$KEA_VERSION \
+    kea-admin=$KEA_VERSION \
+    kea-common=$KEA_VERSION \
+    kea-ctrl-agent=$KEA_VERSION \
+    kea-dhcp-ddns=$KEA_VERSION \
+    kea-dhcp4=$KEA_VERSION \
+    kea-dhcp6=$KEA_VERSION \
+    kea-doc=$KEA_VERSION \
+    kea-http=$KEA_VERSION \
+    kea-shell=$KEA_VERSION \
+    kea-static=$KEA_VERSION \
   && rm -rf /var/cache/apk/*
 
 # assets
