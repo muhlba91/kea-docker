@@ -2,7 +2,7 @@
 FROM alpine:3.13 AS base-image
 
 # arguments
-ARG BUILD_BASE="build-base binutils clang llvm lld make gawk autoconf automake libtool curl clang-dev "
+ARG BUILD_BASE="build-base binutils clang llvm lld make gawk autoconf automake libtool curl clang-dev"
 ARG BUILD_PKGS="${BUILD_BASE}"
 ARG CFLAGS="-O2 -pthread -pipe -fPIC -fPIE -fomit-frame-pointer "
 ARG CXXFLAGS="${CFLAGS} "
@@ -18,8 +18,8 @@ ENV CC="clang" \
     STRIP="llvm-strip"
 
 # make base image
-RUN apk update  \
-    apk add ${BUILD_PKGS}
+RUN apk update \
+    && apk add ${BUILD_PKGS}
 
 
 ## log4cplus
@@ -30,8 +30,8 @@ ENV LOG4CPLUS="2.0.5"
 ENV LOG4CPLUS_SOURCE="https://sourceforge.net/projects/log4cplus/files/log4cplus-stable/${LOG4CPLUS}/log4cplus-${LOG4CPLUS}.tar.bz2"
 
 # build library
-RUN apk update  \
-    apk add ${BUILD_PKGS}
+RUN apk update \
+    && apk add ${BUILD_PKGS}
 RUN mkdir -p /usr/local/src \
     && curl -fSsL ${LOG4CPLUS_SOURCE} -o log4cplus.tar.bz2 \
     && tar xf log4cplus.tar.bz2 --strip-components=1 -C /usr/local/src \
@@ -55,8 +55,8 @@ ARG CXXFLAGS="${CFLAGS} "
 ARG CPPFLAGS="${CFLAGS} "
 
 # build library
-RUN apk update  \
-    apk add ${BUILD_PKGS}
+RUN apk update \
+    && apk add ${BUILD_PKGS}
 RUN mkdir -p /usr/local/src \
     && curl -fsSL "https://github.com/randombit/botan/archive/${BOTAN}.tar.gz" -o botan.tar.gz \
     && tar xf botan.tar.gz --strip-components=1 -C /usr/local/src \
@@ -94,8 +94,8 @@ ARG CXXFLAGS="${CFLAGS} "
 # dev package install
 COPY --from=log4cplus /tmp/root /
 COPY --from=botan /tmp/root /
-RUN apk update  \
-    apk add ${BUILD_PKGS}
+RUN apk update \
+    && apk add ${BUILD_PKGS}
 # build
 RUN mkdir -p /tmp/build \
   && curl -fSsL "https://ftp.isc.org/isc/kea/${KEA_VERSION}/kea-${KEA_VERSION}.tar.gz" \
@@ -139,8 +139,8 @@ ARG RUN_PKGS="libgcc libstdc++ boost-system mariadb-connector-c libpq tzdata pro
               libbz2 cassandra-cpp-driver "
 COPY --from=log4cplus /tmp/root /
 COPY --from=botan /tmp/root /
-RUN apk update  \
-    apk add --no-cache ${BUILD_PKGS} \
+RUN apk update \
+    && apk add --no-cache ${BUILD_PKGS} \
     && rm -rf /var/cache/apk/* /usr/local/share/man/* \
     && mkdir -p /var/lib/kea
 
