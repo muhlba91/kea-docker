@@ -4,11 +4,7 @@
 [![](https://img.shields.io/github/release-date/muhlba91/kea-docker?style=for-the-badge)](https://github.com/muhlba91/kea-docker/releases)
 [![](https://img.shields.io/docker/v/muhlba91/kea?style=for-the-badge)](https://hub.docker.com/r/muhlba91/kea)
 
-Taken from [kometech/kea](https://github.com/kometchtech/docker-build/tree/master/kea) and adapted for multi-arch builds.
-
 ## Usage
-
-**Note**: DHCP must run on the host network!
 
 ```shell
 # start the powerdns container
