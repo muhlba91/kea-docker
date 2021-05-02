@@ -30,6 +30,7 @@ RUN apk update \
 
 # assets
 ADD assets/entrypoint.sh /bin/kea
+ADD assets/keactrl /usr/local/sbin/keactrl
 
 # expose and entrypoint
 EXPOSE 67/UDP 547/TCP 547/UDP
