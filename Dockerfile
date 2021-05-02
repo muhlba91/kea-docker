@@ -26,7 +26,8 @@ RUN apk update \
     kea-http=$KEA_VERSION \
     kea-shell=$KEA_VERSION \
     kea-static=$KEA_VERSION \
-  && rm -rf /var/cache/apk/*
+  && rm -rf /var/cache/apk/* \
+  && mkdir -p /run/kea
 
 # assets
 ADD assets/entrypoint.sh /bin/kea
